@@ -32,13 +32,15 @@ function Planner() {
     setMealPlan(null)
 
     try {
-      setDebugInfo('Submitting to /generate...')
-      const response = await api.generatePlan(formData)
-      setDebugInfo('Response received. Status: ' + response.status)
+      const payload = { ...formData, numServings: Number(formData.numServings), cookingTime: Number(formData.cookingTime) }
+      setDebugInfo(`Submitting to /generate with payload: ${JSON.stringify(payload)}`)
+      const response = await api.generatePlan(payload)
+      setDebugInfo(`Response received. Status: ${response.status}`)
       setMealPlan(response.data)
     } catch (err) {
       console.error('Planner error:', err)
-      setDebugInfo('Error: ' + (err.message || 'Unknown error'))
+      const corsMsg = err.message === 'Network Error' ? ' (likely CORS or network issue)' : ''
+      setDebugInfo(`Error: ${err.message}${corsMsg}`)
       setError(err.response?.data?.error || 'Failed to generate meal plan')
     } finally {
       setLoading(false)
