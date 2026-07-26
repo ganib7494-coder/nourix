@@ -3,6 +3,7 @@ import json
 import traceback
 import requests
 from flask import Flask, request, jsonify, render_template, send_from_directory
+from flask_cors import CORS
 from groq import Groq
 from dotenv import load_dotenv
 
@@ -11,6 +12,8 @@ load_dotenv()
 app = Flask(__name__,
             template_folder=os.path.join(os.path.dirname(__file__), 'templates'),
             static_folder=os.path.join(os.path.dirname(__file__), 'static'))
+
+CORS(app)
 
 FRONTEND_DIST = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'frontend', 'dist')
 

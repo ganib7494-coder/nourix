@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import axios from 'axios'
+import api from '../services/api'
 import './Planner.css'
 
 function Planner() {
@@ -14,10 +14,11 @@ function Planner() {
     numServings: '2',
     cookingTime: '30'
   })
-  
+
   const [mealPlan, setMealPlan] = useState(null)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
+  const [debugInfo, setDebugInfo] = useState('')
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value })
@@ -27,12 +28,17 @@ function Planner() {
     e.preventDefault()
     setLoading(true)
     setError('')
+    setDebugInfo('')
     setMealPlan(null)
 
     try {
-      const response = await axios.post('/generate', formData)
+      setDebugInfo('Submitting to /generate...')
+      const response = await api.generatePlan(formData)
+      setDebugInfo('Response received. Status: ' + response.status)
       setMealPlan(response.data)
     } catch (err) {
+      console.error('Planner error:', err)
+      setDebugInfo('Error: ' + (err.message || 'Unknown error'))
       setError(err.response?.data?.error || 'Failed to generate meal plan')
     } finally {
       setLoading(false)
@@ -43,7 +49,7 @@ function Planner() {
     <div className="planner">
       <div className="container">
         <h1>AI Nutrition Planner</h1>
-        
+
         <div className="planner-content">
           <form onSubmit={handleSubmit} className="planner-form">
             <div className="form-section">
@@ -167,12 +173,14 @@ function Planner() {
             </button>
           </form>
 
+          {debugInfo && <div className="debug-info">Debug: {debugInfo}</div>}
+
           {error && <div className="error-message">{error}</div>}
 
           {mealPlan && (
             <div className="meal-plan-result">
               <h2>Your Personalized Meal Plan</h2>
-              
+
               {mealPlan.meal_plan && (
                 <div className="meals">
                   {Object.entries(mealPlan.meal_plan).map(([meal, details]) => (
