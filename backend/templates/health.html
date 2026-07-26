@@ -1,0 +1,134 @@
+{% extends "base.html" %}
+
+{% block title %}Health & AI Tips{% endblock %}
+
+{% block content %}
+    <h1 class="text-center mb-4 display-4 fw-bold">Health & AI Tips</h1>
+    <p class="text-center lead mb-5">Explore healthy foods, nutrition insights, and tips for a balanced lifestyle.</p>
+
+    <div class="row mb-5">
+        <div class="col-md-6 mb-4">
+            <div class="card glassmorphism-card h-100 p-3">
+                <div class="card-body">
+                    <h5 class="card-title text-success"><i class="fas fa-apple-alt me-2"></i>Healthy Foods Spotlight</h5>
+                    <p class="card-text">Discover nutrient-rich foods that can boost your health:</p>
+                    <ul>
+                        <li><strong>Avocado:</strong> Healthy fats, fiber, vitamins K, C, B6, E.</li>
+                        <li><strong>Berries:</strong> Antioxidants, fiber, vitamin C.</li>
+                        <li><strong>Leafy Greens:</strong> Vitamins A, C, E, K, iron, calcium.</li>
+                        <li><strong>Salmon:</strong> Omega-3 fatty acids, protein, vitamin D.</li>
+                        <li><strong>Quinoa:</strong> Complete protein, fiber, iron, magnesium.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 mb-4">
+            <div class="card glassmorphism-card h-100 p-3">
+                <div class="card-body">
+                    <h5 class="card-title text-success"><i class="fas fa-chart-pie me-2"></i>Nutrition Facts & Cards</h5>
+                    <div class="row">
+                        <div class="col-6 mb-3">
+                            <div class="nutrition-card text-center">
+                                <i class="fas fa-fire fa-2x text-danger mb-2"></i>
+                                <p class="mb-0 fw-bold">Calories</p>
+                                <p class="mb-0">~2000/day</p>
+                            </div>
+                        </div>
+                        <div class="col-6 mb-3">
+                            <div class="nutrition-card text-center">
+                                <i class="fas fa-egg fa-2x text-primary mb-2"></i>
+                                <p class="mb-0 fw-bold">Protein</p>
+                                <p class="mb-0">~50g/day</p>
+                            </div>
+                        </div>
+                        <div class="col-6 mb-3">
+                            <div class="nutrition-card text-center">
+                                <i class="fas fa-bread-slice fa-2x text-warning mb-2"></i>
+                                <p class="mb-0 fw-bold">Carbs</p>
+                                <p class="mb-0">~275g/day</p>
+                            </div>
+                        </div>
+                        <div class="col-6 mb-3">
+                            <div class="nutrition-card text-center">
+                                <i class="fas fa-bacon fa-2x text-secondary mb-2"></i>
+                                <p class="mb-0 fw-bold">Fat</p>
+                                <p class="mb-0">~70g/day</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mb-5">
+        <div class="col-md-6 mb-4">
+            <div class="card glassmorphism-card h-100 p-3">
+                <div class="card-body">
+                    <h5 class="card-title text-success"><i class="fas fa-heartbeat me-2"></i>BMI Information</h5>
+                    <p class="card-text">Body Mass Index (BMI) is a simple calculation using a person's height and weight. The formula is BMI = kg/m² where kg is a person's weight in kilograms and m² is their height in meters squared.</p>
+                    <h6>BMI Categories:</h6>
+                    <ul>
+                        <li>Underweight: &lt; 18.5</li>
+                        <li>Normal weight: 18.5 – 24.9</li>
+                        <li>Overweight: 25 – 29.9</li>
+                        <li>Obese: &ge; 30</li>
+                    </ul>
+                    <small class="text-muted">Note: BMI is a screening tool, not a diagnostic tool.</small>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 mb-4">
+            <div class="card glassmorphism-card h-100 p-3">
+                <div class="card-body">
+                    <h5 class="card-title text-success"><i class="fas fa-running me-2"></i>Exercise Suggestions</h5>
+                    <p class="card-text">Incorporate physical activity into your daily routine for optimal health:</p>
+                    <ul>
+                        <li><strong>Cardio:</strong> Aim for 150 minutes of moderate-intensity or 75 minutes of vigorous-intensity aerobic activity per week.</li>
+                        <li><strong>Strength Training:</strong> 2-3 times a week, targeting all major muscle groups.</li>
+                        <li><strong>Flexibility:</strong> Daily stretching or yoga.</li>
+                        <li><strong>Walk More:</strong> Take the stairs, walk during breaks, or park further away.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mb-5">
+        <div class="col-md-6 mb-4">
+            <div class="card glassmorphism-card h-100 p-3">
+                <div class="card-body">
+                    <h5 class="card-title text-success"><i class="fas fa-tint me-2"></i>Water Intake Tips</h5>
+                    <p class="card-text">Hydration is key for overall health. Here's how to stay adequately hydrated:</p>
+                    <ul>
+                        <li>Drink water throughout the day, not just when thirsty.</li>
+                        <li>Carry a reusable water bottle.</li>
+                        <li>Infuse water with fruits for flavor.</li>
+                        <li>Drink a glass of water before each meal.</li>
+                        <li>Limit sugary drinks.</li>
+                    </ul>
+                    <small class="text-muted">Aim for around 8 glasses (2 liters) per day, but individual needs vary.</small>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 mb-4">
+            <div class="card glassmorphism-card h-100 p-3">
+                <div class="card-body">
+                    <h5 class="card-title text-success"><i class="fas fa-leaf me-2"></i>Healthy Lifestyle Tips</h5>
+                    <p class="card-text">Beyond diet and exercise, a holistic approach to health includes:</p>
+                    <ul>
+                        <li><strong>Quality Sleep:</strong> Aim for 7-9 hours per night.</li>
+                        <li><strong>Stress Management:</strong> Practice mindfulness, meditation, or hobbies.</li>
+                        <li><strong>Social Connection:</strong> Maintain strong relationships.</li>
+                        <li><strong>Limit Processed Foods:</strong> Focus on whole, unprocessed ingredients.</li>
+                        <li><strong>Mindful Eating:</strong> Pay attention to hunger and fullness cues.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="text-center">
+        <p class="lead text-muted">*These tips are for general informational purposes only and do not constitute medical advice. Consult with a healthcare professional for personalized guidance.</p>
+    </div>
+{% endblock %}

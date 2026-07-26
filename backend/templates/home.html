@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block title %}AI Nutrition Planner{% endblock %}
+
+{% block content %}
+    <section class="hero-banner text-white d-flex align-items-center justify-content-center text-center">
+        <div class="container">
+            <h1 class="display-3 fw-bold animate__animated animate__fadeInDown">Achieve Your Health Goals with AI</h1>
+            <p class="lead mb-4 animate__animated animate__fadeInUp">Personalized nutrition plans, healthy recipes, and expert tips, all powered by AI.</p>
+            <a href="/planner" class="btn btn-success btn-lg rounded-pill animate__animated animate__zoomIn">Start Your Plan Now</a>
+        </div>
+    </section>
+
+    <section class="features py-5">
+        <div class="container">
+            <h2 class="text-center mb-5 display-5 fw-bold">Why Choose Nourix?</h2>
+            <div class="row text-center">
+                <div class="col-md-4 mb-4">
+                    <div class="card glassmorphism-card h-100 animate__animated animate__fadeInUp animate__delay-1s">
+                        <div class="card-body">
+                            <i class="fas fa-robot fa-3x mb-3 text-success"></i>
+                            <h5 class="card-title fw-bold">AI-Powered Plans</h5>
+                            <p class="card-text">Get meal plans tailored to your unique needs and goals instantly.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="card glassmorphism-card h-100 animate__animated animate__fadeInUp animate__delay-2s">
+                        <div class="card-body">
+                            <i class="fas fa-seedling fa-3x mb-3 text-success"></i>
+                            <h5 class="card-title fw-bold">Healthy Recipes</h5>
+                            <p class="card-text">Discover delicious and nutritious recipes designed for your well-being.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="card glassmorphism-card h-100 animate__animated animate__fadeInUp animate__delay-3s">
+                        <div class="card-body">
+                            <i class="fas fa-chart-line fa-3x mb-3 text-success"></i>
+                            <h5 class="card-title fw-bold">Track Your Progress</h5>
+                            <p class="card-text">Monitor your intake and see your journey unfold with smart insights.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-banner text-white text-center py-5">
+        <div class="container">
+            <h2 class="display-4 fw-bold mb-3">Ready to Transform Your Health?</h2>
+            <p class="lead mb-4">Join thousands who are achieving their nutrition goals with Nourix.</p>
+            <a href="/planner" class="btn btn-warning btn-lg rounded-pill">Get Started Free</a>
+        </div>
+    </section>
+{% endblock %}

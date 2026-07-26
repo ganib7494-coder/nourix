@@ -1,0 +1,196 @@
+{% extends "base.html" %}
+
+{% block title %}Meal Planner{% endblock %}
+
+{% block content %}
+    <h1 class="text-center mb-4 display-4 fw-bold">Your Personalized Meal Planner</h1>
+    <p class="text-center lead mb-5">Plan your full day meals with AI-powered nutrition insights!</p>
+
+    <div class="row justify-content-center">
+        <div class="col-lg-10 col-md-12">
+            <div class="card glassmorphism-card p-4 shadow-lg">
+                <form id="mealPlanForm">
+                    <h4 class="text-success mb-3">🍳 Breakfast</h4>
+                    <div class="row mb-4">
+                        <div class="col-md-6">
+                            <label for="breakfast" class="form-label">Breakfast Idea <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control glass-input" id="breakfast" name="breakfast" placeholder="e.g., Oatmeal with berries, Scrambled Eggs" required>
+                        </div>
+                    </div>
+
+                    <h4 class="text-success mb-3">🥗 Lunch</h4>
+                    <div class="row mb-4">
+                        <div class="col-md-6">
+                            <label for="lunch" class="form-label">Lunch Idea <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control glass-input" id="lunch" name="lunch" placeholder="e.g., Grilled Chicken Salad, Quinoa Bowl" required>
+                        </div>
+                    </div>
+
+                    <h4 class="text-success mb-3">🌙 Dinner</h4>
+                    <div class="row mb-4">
+                        <div class="col-md-6">
+                            <label for="dinner" class="form-label">Dinner Idea <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control glass-input" id="dinner" name="dinner" placeholder="e.g., Salmon with Vegetables, Pasta" required>
+                        </div>
+                    </div>
+
+                    <h4 class="text-success mb-3">🎯 Your Profile</h4>
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label for="activityLevel" class="form-label">Activity Level / Goal <span class="text-danger">*</span></label>
+                            <select class="form-select glass-input" id="activityLevel" name="activityLevel" required>
+                                <option value="">Select your goal</option>
+                                <option value="weight loss">Weight Loss</option>
+                                <option value="weight gain">Weight Gain</option>
+                                <option value="moderate">Moderate / Maintenance</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="dietPreference" class="form-label">Dietary Preference <span class="text-danger">*</span></label>
+                            <select class="form-select glass-input" id="dietPreference" name="dietPreference" required>
+                                <option value="">Select diet type</option>
+                                <option value="balanced">Balanced</option>
+                                <option value="vegetarian">Vegetarian</option>
+                                <option value="vegan">Vegan</option>
+                                <option value="keto">Keto</option>
+                                <option value="paleo">Paleo</option>
+                                <option value="mediterranean">Mediterranean</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="row mb-4">
+                        <div class="col-md-6">
+                            <label for="allergies" class="form-label">Allergies <span class="text-muted">(optional)</span></label>
+                            <input type="text" class="form-control glass-input" id="allergies" name="allergies" placeholder="e.g., Peanuts, Dairy, Shellfish">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="cuisine" class="form-label">Cuisine Preference <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control glass-input" id="cuisine" name="cuisine" placeholder="e.g., Italian, Mexican, Asian" required>
+                        </div>
+                    </div>
+
+                    <div class="row mb-4">
+                        <div class="col-md-4">
+                            <label for="numServings" class="form-label">Servings <span class="text-danger">*</span></label>
+                            <input type="number" class="form-control glass-input" id="numServings" name="numServings" min="1" value="1" required>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="cookingTime" class="form-label">Max Cooking Time (min) <span class="text-danger">*</span></label>
+                            <input type="number" class="form-control glass-input" id="cookingTime" name="cookingTime" min="10" value="30" required>
+                        </div>
+                    </div>
+
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-success btn-lg rounded-pill animate__animated animate__pulse animate__infinite">
+                            <i class="fas fa-magic me-2"></i> Generate Full Day Plan
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div id="loadingSpinner" class="text-center mt-5" style="display:none;">
+        <div class="spinner-border text-success" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+        <p class="mt-2">Generating your personalized meal plan...</p>
+    </div>
+
+    <div id="mealPlanResult" class="mt-5" style="display:none;">
+        <h2 class="text-center mb-4 display-5 fw-bold">🍽️ Your Personalized Meal Plan</h2>
+
+        <div class="card glassmorphism-card p-4 shadow-lg mb-4">
+            <h3 class="text-success mb-3">Breakfast</h3>
+            <div class="meal-image-card mb-3" id="breakfastImageCard">
+                <img src="" class="img-fluid rounded meal-image" alt="Breakfast Meal Image" id="breakfastImage">
+                <div class="meal-info">
+                    <h5 class="meal-card-title" id="breakfastCardMealName"></h5>
+                    <p class="meal-card-calories" id="breakfastCardCalories"></p>
+                </div>
+            </div>
+            <ul class="list-group list-group-flush mb-3">
+                <li class="list-group-item glass-item">Meal: <span id="mealPlanBreakfastName"></span></li>
+                <li class="list-group-item glass-item">Calories: <span id="mealPlanBreakfastCalories"></span></li>
+                <li class="list-group-item glass-item">Protein: <span id="mealPlanBreakfastProtein"></span></li>
+                <li class="list-group-item glass-item">Carbs: <span id="mealPlanBreakfastCarbs"></span></li>
+                <li class="list-group-item glass-item">Fat: <span id="mealPlanBreakfastFat"></span></li>
+            </ul>
+
+            <h3 class="text-success mb-3">Lunch</h3>
+            <div class="meal-image-card mb-3" id="lunchImageCard">
+                <img src="" class="img-fluid rounded meal-image" alt="Lunch Meal Image" id="lunchImage">
+                <div class="meal-info">
+                    <h5 class="meal-card-title" id="lunchCardMealName"></h5>
+                    <p class="meal-card-calories" id="lunchCardCalories"></p>
+                </div>
+            </div>
+            <ul class="list-group list-group-flush mb-3">
+                <li class="list-group-item glass-item">Meal: <span id="mealPlanLunchName"></span></li>
+                <li class="list-group-item glass-item">Calories: <span id="mealPlanLunchCalories"></span></li>
+                <li class="list-group-item glass-item">Protein: <span id="mealPlanLunchProtein"></span></li>
+                <li class="list-group-item glass-item">Carbs: <span id="mealPlanLunchCarbs"></span></li>
+                <li class="list-group-item glass-item">Fat: <span id="mealPlanLunchFat"></span></li>
+            </ul>
+
+            <h3 class="text-success mb-3">Dinner</h3>
+            <div class="meal-image-card mb-3" id="dinnerImageCard">
+                <img src="" class="img-fluid rounded meal-image" alt="Dinner Meal Image" id="dinnerImage">
+                <div class="meal-info">
+                    <h5 class="meal-card-title" id="dinnerCardMealName"></h5>
+                    <p class="meal-card-calories" id="dinnerCardCalories"></p>
+                </div>
+            </div>
+            <ul class="list-group list-group-flush mb-3">
+                <li class="list-group-item glass-item">Meal: <span id="mealPlanDinnerName"></span></li>
+                <li class="list-group-item glass-item">Calories: <span id="mealPlanDinnerCalories"></span></li>
+                <li class="list-group-item glass-item">Protein: <span id="mealPlanDinnerProtein"></span></li>
+                <li class="list-group-item glass-item">Carbs: <span id="mealPlanDinnerCarbs"></span></li>
+                <li class="list-group-item glass-item">Fat: <span id="mealPlanDinnerFat"></span></li>
+            </ul>
+        </div>
+
+        <div class="card glassmorphism-card p-4 shadow-lg mb-4">
+            <h3 class="text-success mb-3">🥗 Ingredients Table</h3>
+            <div class="table-responsive">
+                <table class="table table-striped glass-table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Ingredient</th>
+                            <th scope="col">Quantity</th>
+                            <th scope="col">Benefit</th>
+                        </tr>
+                    </thead>
+                    <tbody id="ingredientsTableBody"></tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="card glassmorphism-card p-4 shadow-lg mb-4">
+            <h3 class="text-success mb-3">👨‍🍳 Cooking Steps</h3>
+            <ol id="cookingStepsList" class="list-group list-group-numbered list-group-flush"></ol>
+        </div>
+
+        <div class="card glassmorphism-card p-4 shadow-lg mb-4">
+            <h3 class="text-success mb-3">💡 AI Nutrition Tips</h3>
+            <ul id="aiNutritionTipsList" class="list-group list-group-flush"></ul>
+        </div>
+
+        <div class="card glassmorphism-card p-4 shadow-lg mb-4">
+            <h3 class="text-success mb-3">❤️ Health Benefits</h3>
+            <ul id="healthBenefitsList" class="list-group list-group-flush"></ul>
+        </div>
+
+        <div class="card glassmorphism-card p-4 shadow-lg mb-4">
+            <h3 class="text-success mb-3">📊 Daily Nutrition Summary</h3>
+            <ul class="list-group list-group-flush mb-3">
+                <li class="list-group-item glass-item">Calories: <span id="dailySummaryCalories"></span></li>
+                <li class="list-group-item glass-item">Protein: <span id="dailySummaryProtein"></span></li>
+                <li class="list-group-item glass-item">Carbohydrates: <span id="dailySummaryCarbohydrates"></span></li>
+                <li class="list-group-item glass-item">Fat: <span id="dailySummaryFat"></span></li>
+                <li class="list-group-item glass-item">Fiber: <span id="dailySummaryFiber"></span></li>
+            </ul>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+{% block title %}About{% endblock %}
+
+{% block content %}
+    <h1 class="text-center mb-4 display-4 fw-bold">About Nourix - AI Nutrition Planner</h1>
+    <p class="text-center lead mb-5">Learn more about our mission, features, and the technology behind Nourix.</p>
+
+    <div class="row mb-5">
+        <div class="col-lg-8 mx-auto">
+            <div class="card glassmorphism-card p-4 shadow-lg">
+                <div class="card-body">
+                    <h5 class="card-title text-success mb-3"><i class="fas fa-info-circle me-2"></i>Project Description</h5>
+                    <p><strong>Nourix</strong> is a cutting-edge AI-powered nutrition planner designed to revolutionize how individuals approach their dietary and health goals. Leveraging advanced AI models, Nourix provides personalized meal plans, healthy recipes, and insightful health tips tailored to each user's unique preferences, dietary needs, and fitness objectives.</p>
+                    <p>Our mission is to make healthy eating accessible, enjoyable, and sustainable for everyone, regardless of their busy schedules or specific requirements.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mb-5">
+        <div class="col-lg-8 mx-auto">
+            <div class="card glassmorphism-card p-4 shadow-lg">
+                <div class="card-body">
+                    <h5 class="card-title text-success mb-3"><i class="fas fa-cogs me-2"></i>Key Features</h5>
+                    <ul>
+                        <li><strong>Personalized Meal Plans:</strong> Generate daily meal plans based on breakfast, lunch, dinner ideas, cuisine, diet preferences, fitness goals, allergies, servings, and cooking time.</li>
+                        <li><strong>Detailed Nutritional Information:</strong> Receive comprehensive data on calories, protein, carbs, fat, fiber, vitamins, and minerals for each meal.</li>
+                        <li><strong>Recipe & Cooking Steps:</strong> Clear, step-by-step instructions for preparing your meals.</li>
+                        <li><strong>Health Benefits & Alternatives:</strong> Understand the health advantages of your meals and discover healthier ingredient swaps.</li>
+                        <li><strong>Daily Health & AI Tips:</strong> Curated information on healthy foods, BMI, exercise, hydration, and general lifestyle advice.</li>
+                        <li><strong>Modern & Responsive UI:</strong> A sleek, green-themed interface with glassmorphism effects, built with Bootstrap 5.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mb-5">
+        <div class="col-lg-8 mx-auto">
+            <div class="card glassmorphism-card p-4 shadow-lg">
+                <div class="card-body">
+                    <h5 class="card-title text-success mb-3"><i class="fas fa-microchip me-2"></i>Technologies Used</h5>
+                    <ul>
+                        <li><strong>Backend:</strong> Python, Flask</li>
+                        <li><strong>Frontend:</strong> HTML5, CSS3, JavaScript, Bootstrap 5, Jinja2 Templates</li>
+                        <li><strong>AI Integration:</strong> Groq API (llama3-8b-8192)</li>
+                        <li><strong>Deployment (Colab):</strong> pyngrok</li>
+                        <li><strong>Styling:</strong> Custom CSS for Glassmorphism, Font Awesome for icons</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
