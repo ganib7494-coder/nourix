@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: nourix-backend
+    runtime: python
+    plan: free
+    buildCommand: pip install -r backend/requirements.txt
+    startCommand: cd backend && gunicorn app:app
+    envVars:
+      - key: GROQ_API_KEY
+        sync: false
+      - key: PIXABAY_API_KEY
+        sync: false
+      - key: SECRET_KEY
+        generateValue: true
+      - key: FLASK_ENV
+        value: production
