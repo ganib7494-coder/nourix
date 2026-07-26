@@ -5,14 +5,9 @@ const API_BASE = '/api'
 export const api = {
   health: () => axios.get(`${API_BASE}/health`),
   
-  planner: (data) => axios.post(`${API_BASE}/planner`, data),
+  generatePlan: (data) => axios.post('/generate', data),
   
-  chat: (message, context = '') => 
-    axios.post(`${API_BASE}/chat`, { message, context }),
-  
-  tips: () => axios.get(`${API_BASE}/tips`),
-  
-  mealPlan: (data) => axios.post(`${API_BASE}/planner`, data)
+  tips: () => axios.get(`${API_BASE}/tips`)
 }
 
 export default api

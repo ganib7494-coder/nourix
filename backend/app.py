@@ -2,7 +2,7 @@ import os
 import json
 import traceback
 import requests
-from flask import Flask, request, jsonify, render_template
+from flask import Flask, request, jsonify, render_template, send_from_directory
 from groq import Groq
 from dotenv import load_dotenv
 
@@ -11,6 +11,8 @@ load_dotenv()
 app = Flask(__name__,
             template_folder=os.path.join(os.path.dirname(__file__), 'templates'),
             static_folder=os.path.join(os.path.dirname(__file__), 'static'))
+
+FRONTEND_DIST = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'frontend', 'dist')
 
 GROQ_API_KEY = os.environ.get("GROQ_API_KEY")
 PIXABAY_API_KEY = os.environ.get("PIXABAY_API_KEY")
@@ -36,22 +38,33 @@ def get_image_url(query):
     
     return "https://images.unsplash.com/photo-1540189549336-e619d45e0ace?q=80&w=2670&auto=format&fit=crop"
 
-@app.route("/")
-def home():
-    return render_template("home.html")
+# Serve React frontend
+@app.route('/')
+def serve_home():
+    return send_from_directory(FRONTEND_DIST, 'index.html')
 
-@app.route("/planner")
-def planner_page():
-    return render_template("planner.html")
+@app.route('/planner')
+def serve_planner():
+    return send_from_directory(FRONTEND_DIST, 'index.html')
 
-@app.route("/health")
-def health_page():
-    return render_template("health.html")
+@app.route('/health')
+def serve_health():
+    return send_from_directory(FRONTEND_DIST, 'index.html')
 
-@app.route("/about")
-def about_page():
-    return render_template("about.html")
+@app.route('/about')
+def serve_about():
+    return send_from_directory(FRONTEND_DIST, 'index.html')
 
+# Serve React static files
+@app.route('/assets/<path:path>')
+def serve_assets(path):
+    return send_from_directory(os.path.join(FRONTEND_DIST, 'assets'), path)
+
+@app.route('/vite.svg')
+def serve_vite_icon():
+    return send_from_directory(FRONTEND_DIST, 'vite.svg')
+
+# API routes
 @app.route("/api/health")
 def health():
     return jsonify({'status': 'healthy', 'service': 'Nourix API'})
@@ -173,5 +186,13 @@ def generate_meal_plan():
         app.logger.error(traceback.format_exc())
         return jsonify({"error": f"An unexpected error occurred: {str(e)}"}), 500
 
+# Catch-all for React Router
+@app.route('/<path:path>')
+def catch_all(path):
+    if os.path.exists(os.path.join(FRONTEND_DIST, path)):
+        return send_from_directory(FRONTEND_DIST, path)
+    return send_from_directory(FRONTEND_DIST, 'index.html')
+
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000, debug=True)
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host="0.0.0.0", port=port, debug=True)
